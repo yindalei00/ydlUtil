@@ -1,5 +1,6 @@
 package cn.sh.ideal.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 /**
@@ -10,6 +11,7 @@ import android.content.Context;
 
 public class YdlUtil {
 
+    @SuppressLint("StaticFieldLeak")
     private static Context sContext;
 
 

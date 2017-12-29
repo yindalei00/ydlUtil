@@ -14,8 +14,8 @@ import java.util.Map;
 /**
  *
  * @author yindalei
- * @date 2017/6/6
- *  Gson 工具类  json转换
+ *
+ * Gson 转换 工具类
  */
 public class GsonUtil {
 

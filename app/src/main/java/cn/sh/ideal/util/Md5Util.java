@@ -3,13 +3,11 @@ package cn.sh.ideal.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Create By yindalei at 2017/3/26.14:29
- *
- * @author yindalei
- * @描述 ${TODO}
- */
 
+/**
+ * @author yindalei
+ * MD5 消息摘要 工具类
+ */
 public class Md5Util {
 
         /**
