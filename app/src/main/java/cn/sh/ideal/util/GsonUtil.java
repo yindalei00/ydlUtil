@@ -77,7 +77,7 @@ public class GsonUtil {
      * @param <T> 泛型
      * @return 集合
      */
-    public <T> List<T> json2List(String json, Class<T> cls) {
+    public static  <T> List<T> json2List(String json, Class<T> cls) {
         Gson gson = new GsonBuilder().create();
         List<T> list = new ArrayList<T>();
         JsonArray array = new JsonParser().parse(json).getAsJsonArray();

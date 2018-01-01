@@ -19,6 +19,7 @@ public class YdlUtil {
          sContext = context;
 
         SPUtil.init(context);
+        ToastUtil.init(context);
 
 
     }
