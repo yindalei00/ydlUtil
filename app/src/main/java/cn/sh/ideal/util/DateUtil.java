@@ -3,18 +3,14 @@ package cn.sh.ideal.util;
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
- *
  * @author yindalei
- * @date 2018/1/1
- * <p>
- * 时间工具类
+ *         <p>
+ *         时间工具类
  */
 
 @SuppressWarnings("WeakerAccess")
@@ -33,9 +29,9 @@ public class DateUtil {
     public static long getTimestamp() {
         return System.currentTimeMillis();
     }
+
     /**
      * 按照指定的文本格式返回当前时间。默认格式：yyyy-MM-dd HH:mm:ss
-     *
      * @return 格式后时间
      */
     public static String getTime() {
@@ -45,7 +41,6 @@ public class DateUtil {
 
     /**
      * 按照指定的文本格式返回当前时间。默认格式：yyyy-MM-dd HH:mm:ss
-     *
      * @param format 时间格式
      * @return 格式后时间
      */
@@ -58,7 +53,6 @@ public class DateUtil {
 
     /**
      * 时间戳格式化
-     *
      * @param timestamp 时间戳
      * @return 格式化之后的字符串
      */
@@ -69,7 +63,6 @@ public class DateUtil {
 
     /**
      * 时间戳格式化
-     *
      * @param timestamp 时间戳
      * @param format    时间格式
      * @return 格式化之后的字符串
@@ -97,12 +90,12 @@ public class DateUtil {
     }
 
 
-    public static void main(String[] args) throws  Exception {
+    public static void main(String[] args) throws Exception {
         System.out.println(format(System.currentTimeMillis()));
         System.out.println(format("123123213123231"));
-//        System.out.println(format("11a"));
+        //        System.out.println(format("11a"));
         System.out.println(format(1213));
-//        System.out.println(format(new HashMap<>()));
+        //        System.out.println(format(new HashMap<>()));
 
         String s = Base64.getEncoder().encodeToString("你好啊".getBytes("utf-8"));
         System.out.println(s);

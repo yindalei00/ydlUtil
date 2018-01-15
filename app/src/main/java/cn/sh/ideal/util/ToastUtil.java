@@ -84,7 +84,7 @@ public class ToastUtil {
      * @param duration 显示时长
      */
     @SuppressLint("ShowToast")
-    private static void showToast(final Context context, final CharSequence text, final int duration) {
+    public static void showToast(final Context context, final CharSequence text, final int duration) {
 
         sHandler.post(new Runnable() {
             @Override

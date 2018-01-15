@@ -1,5 +1,7 @@
 package cn.sh.ideal.util;
 
+import android.support.annotation.Nullable;
+
 import java.io.UnsupportedEncodingException;
 
 
@@ -9,11 +11,18 @@ import java.io.UnsupportedEncodingException;
  *
  */
 public class StringUtil {
-	
 
-	
 
-	
+
+	/**
+	 * Returns true if the string is null or 0-length.
+	 * @param str the string to be examined
+	 * @return true if str is null or zero length
+	 */
+	public static boolean isEmpty(@Nullable String str) {
+		return str == null || str.length() == 0;
+	}
+
 	/**
 	 * 将byte数组转换为十六进制文本
 	 * @param buf

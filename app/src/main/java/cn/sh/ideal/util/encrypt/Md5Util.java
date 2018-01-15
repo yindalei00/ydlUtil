@@ -1,4 +1,4 @@
-package cn.sh.ideal.util;
+package cn.sh.ideal.util.encrypt;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -7,14 +7,13 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * @author yindalei
- *         <p>
- *         MD5 消息摘要 工具类
+ *
+ *  MD5 消息摘要 工具类
  */
 public class Md5Util {
 
     /**
      * md5加密方法
-     *
      * @param s string
      * @return 结果
      */
