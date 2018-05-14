@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.Base64;
 import java.util.Date;
 
 /**
@@ -91,19 +90,24 @@ public class DateUtil {
 
 
     public static void main(String[] args) throws Exception {
-        System.out.println(format(System.currentTimeMillis()));
-        System.out.println(format("123123213123231"));
-        //        System.out.println(format("11a"));
-        System.out.println(format(1213));
-        //        System.out.println(format(new HashMap<>()));
 
-        String s = Base64.getEncoder().encodeToString("你好啊".getBytes("utf-8"));
-        System.out.println(s);
+        long a = 10;
 
-        byte[] decode = Base64.getDecoder().decode(s.getBytes());
+        Object object = a;
 
-        System.out.println(new String(decode, "utf-8"));
+        Class aClass = new A().judgeType(a);
 
+        System.out.println(aClass.getName());
 
+    }
+
+    public  static class A {
+        public Class judgeType(Object temp) {
+            if (temp instanceof Long) {
+                return Long.class;
+            } else {
+                return Object.class;
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class ToastUtil {
 
     @SuppressLint("StaticFieldLeak")
-    private    static Context sContext;
+    private static Context sContext;
 
     private ToastUtil() {
     }
@@ -27,7 +27,7 @@ public class ToastUtil {
      * 初始化工具
      * @param context  上下文
      */
-   static void init(Context context) {
+    static void init(Context context) {
         sContext = context;
     }
 
@@ -36,9 +36,11 @@ public class ToastUtil {
      *
      * @param text    文本
      */
-    public static void showShortToast(  CharSequence text) {
+    public static void showShortToast(CharSequence text) {
         showToast(sContext, text, Toast.LENGTH_SHORT);
-    }/**
+    }
+
+    /**
      * 显示短时吐司
      *
      * @param context 上下文
@@ -54,9 +56,11 @@ public class ToastUtil {
      *
      * @param text    文本
      */
-    public static void showLongToast( CharSequence text) {
+    public static void showLongToast(CharSequence text) {
         showToast(sContext, text, Toast.LENGTH_LONG);
-    }  /**
+    }
+
+    /**
      * 显示长时吐司
      *
      * @param context 上下文
@@ -84,13 +88,17 @@ public class ToastUtil {
      * @param duration 显示时长
      */
     @SuppressLint("ShowToast")
-    public static void showToast(final Context context, final CharSequence text, final int duration) {
+    public static void showToast(Context context, final CharSequence text, final int duration) {
+
+        if (sContext == null) {
+            sContext = context.getApplicationContext();
+        }
 
         sHandler.post(new Runnable() {
             @Override
             public void run() {
                 if (sToast == null) {
-                    sToast = Toast.makeText(context.getApplicationContext(), text, duration);
+                    sToast = Toast.makeText(sContext, text, duration);
                 } else {
                     sToast.setText(text);
                     sToast.setDuration(duration);

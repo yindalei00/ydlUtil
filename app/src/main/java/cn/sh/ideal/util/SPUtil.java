@@ -27,11 +27,11 @@ public class SPUtil {
     /**
      * 存储配置信息的文件名
      */
-    private static String FILE_NAME        = "ydlConfig.sp";
+    private static String DEFAULT_FILE_NAME = "ydlConfig.sp";
     /**
      * 存储 对象 的 文件名
      */
-    private static String OBJECT_FILE_NAME = "ydlObject.sp";
+    private static String OBJECT_FILE_NAME  = "ydlObject.sp";
 
 
     static void init(Context context) {
@@ -54,7 +54,7 @@ public class SPUtil {
             sContext = context.getApplicationContext();
         }
 
-        SharedPreferences preferences = sContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = sContext.getSharedPreferences(DEFAULT_FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = preferences.edit();
         edit.putBoolean(key, value);
         edit.apply();
@@ -78,7 +78,7 @@ public class SPUtil {
             sContext = context.getApplicationContext();
         }
 
-        SharedPreferences preferences = sContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = sContext.getSharedPreferences(DEFAULT_FILE_NAME, Context.MODE_PRIVATE);
         return preferences.getBoolean(key, defValue);
     }
 
@@ -99,13 +99,11 @@ public class SPUtil {
             sContext = context.getApplicationContext();
         }
 
-        SharedPreferences preferences = sContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = sContext.getSharedPreferences(DEFAULT_FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = preferences.edit();
         edit.putString(key, value);
         edit.apply();
     }
-
-
 
 
     /**
@@ -115,37 +113,49 @@ public class SPUtil {
      * @param value value
      */
     public static void save(String key, Object value) {
-        save(sContext, key, value);
+        save(sContext, DEFAULT_FILE_NAME, key, value);
     }
 
-    private static void save(Context context, String key, Object value) {
+    /**
+     * 保存一个 任意类型
+     *
+     * @param fileName   文件名
+     * @param key   key
+     * @param value value
+     */
+    public static void save(String fileName, String key, Object value) {
+        save(sContext, fileName, key, value);
+    }
+
+    /**
+     *
+     * @param context   context
+     * @param fileName  文件名
+     * @param key       键
+     * @param value     默认值
+     */
+    private static void save(Context context, String fileName, String key, Object value) {
 
         if (sContext == null) {
             sContext = context.getApplicationContext();
         }
-        SharedPreferences preferences = sContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = sContext.getSharedPreferences(fileName, Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = preferences.edit();
 
         if (value instanceof Integer) {
             edit.putInt(key, (Integer) value);
-        }else
-        if (value instanceof Long) {
+        } else if (value instanceof Long) {
             edit.putLong(key, (Long) value);
-        }else
-        if (value instanceof Boolean) {
+        } else if (value instanceof Boolean) {
             edit.putBoolean(key, (Boolean) value);
-        }else
-        if (value instanceof String) {
+        } else if (value instanceof String) {
             edit.putString(key, (String) value);
-        } else
-        if (value instanceof Float) {
+        } else if (value instanceof Float) {
             edit.putFloat(key, (Float) value);
-        } else
-        if (value instanceof  Serializable) {
+        } else if (value instanceof Serializable) {
             String string = object2string((Serializable) value);
             edit.putString(key, string);
         }
-
 
         edit.apply();
 
@@ -156,56 +166,75 @@ public class SPUtil {
      * 获取存的 数值
      *
      * @param key key
-     * @param t 默认值
+     * @param defaultValue 默认值
      * @return 根据key得到的值
      */
-    public static<T> T get(String key,T t) {
-        return get(sContext, key,t);
+    public static <T> T get(String key, T defaultValue) {
+        return get(sContext, DEFAULT_FILE_NAME, key, defaultValue);
     }
 
-    private static <T> T get(Context context, String key, T t) {
+    /**
+     * 获取存的 数值
+     *
+     * @param fileName  文件名
+     * @param key       键
+     * @param defaultValue         默认值
+     * @return 根据key得到的值
+     */
+    public static <T> T get(String fileName, String key, T defaultValue) {
+        return get(sContext, fileName, key, defaultValue);
+    }
+
+    /**
+     *
+     * @param context   context
+     * @param key       键
+     * @param defaultValue         默认值
+     * @return 返回对应 的 值
+     */
+    public static <T> T get(Context context, String key, T defaultValue) {
+        return get(context, DEFAULT_FILE_NAME, key, defaultValue);
+    }
+
+    /**
+     *
+     * @param context   context
+     * @param fileName  文件名
+     * @param key       键
+     * @param defaultValue         默认值
+     * @return 返回对应 的 值
+     */
+    public static <T> T get(Context context, String fileName, String key, T defaultValue) {
 
         if (sContext == null) {
             sContext = context.getApplicationContext();
         }
 
-        SharedPreferences sp = sContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sp = sContext.getSharedPreferences(fileName, Context.MODE_PRIVATE);
 
-        if (t instanceof Integer) {
-            Integer anInt = sp.getInt(key, (Integer) t);
+        if (defaultValue instanceof Integer) {
 
-            return (T) anInt;
-        }else
-        if (t instanceof Long) {
-            return (T) (Long)  sp.getLong(key, (Long) t);
-        }else
-        if (t instanceof Boolean) {
-            return (T) (Boolean) sp.getBoolean(key, (Boolean) t);
-        }else
-        if (t instanceof String) {
-            return (T) (String)  sp.getString(key, (String) t);
-        } else
-        if (t instanceof Float) {
-            return (T) (Float) sp.getFloat(key, (Float) t);
-        } else
-        if (t instanceof  Serializable) {
+            return (T) (Integer) (sp.getInt(key, (Integer) defaultValue));
+        } else if (defaultValue instanceof Long) {
+            return (T) (Long) sp.getLong(key, (Long) defaultValue);
+        } else if (defaultValue instanceof Boolean) {
+            return (T) (Boolean) sp.getBoolean(key, (Boolean) defaultValue);
+        } else if (defaultValue instanceof String) {
+            return (T) (String) sp.getString(key, (String) defaultValue);
+        } else if (defaultValue instanceof Float) {
+            return (T) (Float) sp.getFloat(key, (Float) defaultValue);
+        } else if (defaultValue instanceof Serializable || defaultValue == null) {
             String s = sp.getString(key, null);
+
             Object object = string2object(s);
 
-            try {
-                return (T) object;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
+            return (T) (object == null ? s : object);
 
-        }else {
+
+        } else {
             return null;
         }
     }
-
-
-
 
 
     /**
@@ -224,7 +253,7 @@ public class SPUtil {
             sContext = context.getApplicationContext();
         }
 
-        SharedPreferences preferences = sContext.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = sContext.getSharedPreferences(DEFAULT_FILE_NAME, Context.MODE_PRIVATE);
         return preferences.getString(key, null);
     }
 
@@ -259,7 +288,7 @@ public class SPUtil {
      */
     private static Object string2object(String objectString) {
 
-        if (objectString==null) {
+        if (objectString == null) {
             return null;
         }
 
@@ -272,7 +301,6 @@ public class SPUtil {
             objectInputStream.close();
             return object;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
 
