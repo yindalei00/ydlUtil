@@ -88,26 +88,4 @@ public class DateUtil {
 
     }
 
-
-    public static void main(String[] args) throws Exception {
-
-        long a = 10;
-
-        Object object = a;
-
-        Class aClass = new A().judgeType(a);
-
-        System.out.println(aClass.getName());
-
-    }
-
-    public  static class A {
-        public Class judgeType(Object temp) {
-            if (temp instanceof Long) {
-                return Long.class;
-            } else {
-                return Object.class;
-            }
-        }
-    }
 }

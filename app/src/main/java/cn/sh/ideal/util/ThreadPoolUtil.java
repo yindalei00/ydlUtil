@@ -57,7 +57,7 @@ public class ThreadPoolUtil {
         return mInstance;
     }
 
-    @SuppressWarnings("AlibabaThreadShouldSetName")
+
     private ThreadPoolUtil() {
         /**
          * 核心线程池数量的计算规则：当前设备的可用处理器核心数*2 + 1,能够让CPU得到最大效率的发挥；

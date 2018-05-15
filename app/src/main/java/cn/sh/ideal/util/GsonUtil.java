@@ -45,28 +45,12 @@ public class GsonUtil {
      */
     public static <T> T Gson2Bean(String gsonString, Class<T> cls) {
         T t = null;
-        Gson  gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder().create();
         t = gson.fromJson(gsonString, cls);
 
         return t;
     }
 
-    /**
-     * 转成list
-     * 泛型在编译期类型被擦除导致报错
-     *
-     * @param gsonString 字符串
-     * @param cls 类型 .Class
-     * @return 集合
-     */
-    public static <T> List<T> Gson2List(String gsonString, Class<T> cls) {
-        List<T> list = null;
-        Gson gson = new GsonBuilder().create();
-        list = gson.fromJson(gsonString, new TypeToken<List<T>>() {
-        }.getType());
-
-        return list;
-    }
 
     /**
      * 转成list
@@ -77,7 +61,7 @@ public class GsonUtil {
      * @param <T> 泛型
      * @return 集合
      */
-    public static  <T> List<T> json2List(String json, Class<T> cls) {
+    public static <T> List<T> Gson2List(String json, Class<T> cls) {
         Gson gson = new GsonBuilder().create();
         List<T> list = new ArrayList<T>();
         JsonArray array = new JsonParser().parse(json).getAsJsonArray();
@@ -112,7 +96,7 @@ public class GsonUtil {
      */
     public static <T> Map<String, T> Gson2Maps(String gsonString) {
         Map<String, T> map = null;
-        Gson   gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder().create();
         map = gson.fromJson(gsonString, new TypeToken<Map<String, T>>() {
         }.getType());
 

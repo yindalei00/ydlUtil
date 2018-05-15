@@ -29,7 +29,8 @@ public class SPUtil {
      */
     private static String DEFAULT_FILE_NAME = "ydlConfig.sp";
     /**
-     * 存储 对象 的 文件名
+     *   saveO 方法时 默认存储文件名
+     *   存储 对象 的 文件名
      */
     private static String OBJECT_FILE_NAME  = "ydlObject.sp";
 
@@ -130,6 +131,16 @@ public class SPUtil {
     /**
      *
      * @param context   context
+     * @param key       键
+     * @param value     默认值
+     */
+    private static void save(Context context, String key, Object value) {
+
+        save(context,DEFAULT_FILE_NAME,key,value);
+    }
+    /**
+     *
+     * @param context   context
      * @param fileName  文件名
      * @param key       键
      * @param value     默认值
@@ -220,7 +231,7 @@ public class SPUtil {
         } else if (defaultValue instanceof Boolean) {
             return (T) (Boolean) sp.getBoolean(key, (Boolean) defaultValue);
         } else if (defaultValue instanceof String) {
-            return (T) (String) sp.getString(key, (String) defaultValue);
+            return (T) sp.getString(key, (String) defaultValue);
         } else if (defaultValue instanceof Float) {
             return (T) (Float) sp.getFloat(key, (Float) defaultValue);
         } else if (defaultValue instanceof Serializable || defaultValue == null) {

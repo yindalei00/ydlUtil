@@ -4,6 +4,7 @@ import android.app.Application;
 
 import java.util.HashMap;
 
+import cn.sh.ideal.util.DensityUtil;
 import cn.sh.ideal.util.SPUtil;
 import cn.sh.ideal.util.YdlUtil;
 
@@ -45,6 +46,12 @@ public class MyApp extends Application {
 
         SPUtil.save("string", "123456");
         System.out.println(SPUtil.get("string", null));
+
+
+        int i = DensityUtil.dip2px(this, 10);
+        int j = DensityUtil.dp2px(this, 10);
+
+        System.out.println(i+"==="+j);
 
 
     }
