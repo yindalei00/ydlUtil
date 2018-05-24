@@ -1,6 +1,10 @@
 package cn.sh.ideal.util;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -25,8 +29,8 @@ public class HttpUtil {
             // 必须设置如下两行
             urlConnection.setDoOutput(true);
             urlConnection.setDoInput(true);
-            urlConnection.setConnectTimeout(10*1000);
-            urlConnection.setReadTimeout(10*1000);
+            urlConnection.setConnectTimeout(10 * 1000);
+            urlConnection.setReadTimeout(10 * 1000);
 
             urlConnection.connect(); // 建立实际的连接
             // 获取URLConnection对象对应的输出流
@@ -68,7 +72,7 @@ public class HttpUtil {
             // 打开和URL之间的连接
             URLConnection urlConnection = new URL(url).openConnection();
             // 设置通用的请求属性
-            urlConnection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             urlConnection.setRequestProperty("user-agent",
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             // 必须设置如下两行
@@ -110,6 +114,39 @@ public class HttpUtil {
     }
 
 
+    /**
+     * 下载 图片 到指定位置
+     * @param url 图片url
+     * @param file 位置
+     * @throws IOException IO异常
+     */
+    public static void downloadImage(String url, File file) throws IOException {
+
+        // 打开和URL之间的连接
+        URLConnection urlConnection = new URL(url).openConnection();
+        // 设置通用的请求属性
+        urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        urlConnection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+        urlConnection.setDoInput(true);
+        urlConnection.setConnectTimeout(300000);
+        urlConnection.setReadTimeout(300000);
+
+        urlConnection.connect(); // 建立实际的连接
+
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+        BufferedInputStream bis = new BufferedInputStream(urlConnection.getInputStream());
+
+        int len;
+        byte[] bytes = new byte[8096];
+        while ((len = bis.read(bytes, 0, bytes.length)) != -1) {
+            bos.write(bytes, 0, len);
+        }
+
+        bos.close();
+        bis.close();
+
+
+    }
 
     /**
      * 发送消息给微信
