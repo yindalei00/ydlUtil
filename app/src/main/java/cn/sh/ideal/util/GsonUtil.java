@@ -1,5 +1,7 @@
 package cn.sh.ideal.util;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -62,8 +64,13 @@ public class GsonUtil {
      * @return 集合
      */
     public static <T> List<T> Gson2List(String json, Class<T> cls) {
-        Gson gson = new GsonBuilder().create();
         List<T> list = new ArrayList<T>();
+
+        if (TextUtils.isEmpty(json)) {
+            return list;
+        }
+        Gson gson = new GsonBuilder().create();
+
         JsonArray array = new JsonParser().parse(json).getAsJsonArray();
         for (final JsonElement elem : array) {
             list.add(gson.fromJson(elem, cls));
