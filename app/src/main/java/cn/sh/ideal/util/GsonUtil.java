@@ -64,11 +64,11 @@ public class GsonUtil {
      * @return 集合
      */
     public static <T> List<T> Gson2List(String json, Class<T> cls) {
-        List<T> list = new ArrayList<T>();
-
         if (TextUtils.isEmpty(json)) {
-            return list;
+            return null;
         }
+
+        List<T> list = new ArrayList<T>();
         Gson gson = new GsonBuilder().create();
 
         JsonArray array = new JsonParser().parse(json).getAsJsonArray();
