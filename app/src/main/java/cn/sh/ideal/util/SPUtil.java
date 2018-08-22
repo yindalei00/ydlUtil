@@ -35,8 +35,8 @@ public class SPUtil {
     private static String OBJECT_FILE_NAME  = "ydlObject.sp";
 
 
-    static void init(Context context) {
-        sContext = context;
+    public static void init(Context context) {
+        sContext = context.getApplicationContext();
     }
 
     /**
@@ -136,8 +136,9 @@ public class SPUtil {
      */
     private static void save(Context context, String key, Object value) {
 
-        save(context,DEFAULT_FILE_NAME,key,value);
+        save(context, DEFAULT_FILE_NAME, key, value);
     }
+
     /**
      *
      * @param context   context

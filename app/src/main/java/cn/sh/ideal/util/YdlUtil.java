@@ -14,7 +14,7 @@ public class YdlUtil {
 
     public static void init(Context context) {
 
-        SPUtil.init(context);
+        SPUtil.init(context.getApplicationContext());
         ToastUtil.init(context);
 
 

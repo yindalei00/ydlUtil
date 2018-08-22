@@ -1,5 +1,8 @@
 package cn.sh.ideal.util.log;
 
+/**
+ * @author yindalei
+ */
 public class Logger {
     
     private static final String  DEFAULT_TAG = "EXLOGCAT";

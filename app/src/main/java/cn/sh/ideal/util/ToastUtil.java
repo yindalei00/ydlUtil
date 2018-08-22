@@ -27,8 +27,8 @@ public class ToastUtil {
      * 初始化工具
      * @param context  上下文
      */
-    static void init(Context context) {
-        sContext = context;
+    public static void init(Context context) {
+        sContext = context.getApplicationContext();
     }
 
     /**
